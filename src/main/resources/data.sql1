@@ -1,0 +1,43 @@
+DROP TABLE IF EXISTS authors;
+
+CREATE TABLE authors (
+  id_author INT AUTO_INCREMENT PRIMARY KEY,
+  full_name VARCHAR(250) NOT NULL
+);
+
+
+DROP TABLE IF EXISTS books;
+
+CREATE TABLE books (
+   id_book INT AUTO_INCREMENT PRIMARY KEY,
+   title VARCHAR(250) NOT NULL,
+   price NUMERIC
+);
+
+DROP TABLE IF EXISTS authorsbooks;
+
+
+
+create table authorsbooks
+(
+    id_book int,
+    id_author int,
+    CONSTRAINT book_pk PRIMARY KEY (id_book, id_author),
+    CONSTRAINT FK_book
+        FOREIGN KEY (id_book) REFERENCES books (id_book),
+    CONSTRAINT FK_authors
+        FOREIGN KEY (id_author) REFERENCES authors (id_author)
+);
+
+
+INSERT INTO books(id_book, title, price) VALUES (1, 'Властелин Колец, часть первая', 1500);
+INSERT INTO books(id_book, title, price) VALUES (2, 'Три мушкетера', 2500);
+INSERT INTO books(id_book, title, price) VALUES (3, 'Изучаем JAVA', 1230);
+
+INSERT INTO authors(id_author, full_name) VALUES (1, 'Джон Рональд Руэл Толкин');
+INSERT INTO authors(id_author, full_name) VALUES (2, 'Александр Дюма');
+INSERT INTO authors(id_author, full_name) VALUES (3, 'Берт Бейтс');
+INSERT INTO authors(id_author, full_name) VALUES (4, 'Кэти Сьерра');
+
+INSERT INTO authorsbooks(id_book, id_author) VALUES (3,3);
+INSERT INTO authorsbooks(id_book, id_author) VALUES (3,4);
